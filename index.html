@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chaikarthi ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+height:100vh;
+font-family:Segoe UI;
+overflow:hidden;
+}
+
+/* GENERAL */
+.page{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+/* PAGE 1 */
+#page1{
+background:url("https://i.pinimg.com/1200x/34/ea/47/34ea4713017084fb58f524d4a13a07ea.jpg") center/cover;
+color:white;
+font-size:55px;
+cursor:pointer;
+text-shadow:0 0 20px black;
+}
+
+/* BINGO PAGE */
+#pageBingo{
+background:white;
+display:none;
+}
+
+.bingo{
+display:grid;
+grid-template-columns:repeat(5,80px);
+gap:15px;
+}
+
+.cell{
+width:80px;
+height:80px;
+background:#e04b6a;
+border-radius:12px;
+display:flex;
+justify-content:center;
+align-items:center;
+border:3px dotted white;
+cursor:pointer;
+}
+
+/* YES NO */
+#page2{
+background:linear-gradient(135deg,#ff0844,#ffb199);
+display:none;
+}
+
+.box{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
+}
+
+#yes{background:#ff0844;color:white;}
+#no{position:absolute;background:#ccc;}
+
+/* FINAL PAGE */
+#page3{
+background:#4b0f14;
+display:none;
+}
+
+.card-wrapper{
+position:relative;
+}
+
+#card{
+width:420px;
+border-radius:15px;
+box-shadow:0 0 40px black;
+}
+
+.card-text{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:62%;
+text-align:center;
+font-family:'Dancing Script', cursive;
+font-size:24px;
+color:#7b0000;
+font-weight:600;
+line-height:1.4;
+}
+
+/* EFFECTS */
+.heart,.fire{position:absolute;}
+
+@keyframes float{
+from{transform:translateY(100vh);opacity:1}
+to{transform:translateY(-10vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1" onclick="toBingo()">Hi Chaikarthi ❤️</div>
+
+<!-- BINGO -->
+<div class="page" id="pageBingo">
+<h2 style="margin-bottom:25px;font-family:Dancing Script;">Valentine Bingo 💕</h2>
+
+<div class="bingo" id="bingo"></div>
+</div>
+
+<!-- YES NO -->
+<div class="page" id="page2">
+<div class="box">
+<h2>Will you be my Valentine? ❤️</h2><br>
+<button id="yes" onclick="accept()">YES</button>
+<button id="no">NO</button>
+</div>
+</div>
+
+<!-- FINAL -->
+<div class="page" id="page3">
+<div class="card-wrapper">
+
+<img src="https://i.pinimg.com/736x/61/0d/08/610d087797822e6dfed8a70d1f4cd160.jpg" id="card">
+
+<div class="card-text">
+Happy Valentine’s Day my sweet baby,<br>
+my Chaikarthi ❤️<br><br>
+
+I love you so much 💖<br><br>
+
+You are the best girlfriend EVER ❤️<br><br>
+
+Im so grateful to have you 💖
+</div>
+
+</div>
+</div>
+
+<script>
+function toBingo(){
+page1.style.display="none";
+pageBingo.style.display="flex";
+createGrid();
+}
+
+function createGrid(){
+const grid=document.getElementById("bingo");
+grid.innerHTML="";
+const win=Math.floor(Math.random()*25);
+
+for(let i=0;i<25;i++){
+let d=document.createElement("div");
+d.className="cell";
+if(i===win){
+d.onclick=toValentine;
+}
+grid.appendChild(d);
+}
+}
+
+function toValentine(){
+pageBingo.style.display="none";
+page2.style.display="flex";
+}
+
+no.addEventListener("mouseover",()=>{
+no.style.left=Math.random()*80+"vw";
+no.style.top=Math.random()*80+"vh";
+});
+
+function accept(){
+page2.style.display="none";
+page3.style.display="flex";
+
+for(let i=0;i<40;i++) heart();
+for(let i=0;i<25;i++) fire();
+}
+
+function heart(){
+let h=document.createElement("div");
+h.innerHTML="❤️";
+h.className="heart";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=Math.random()*30+10+"px";
+h.style.animation="float 5s linear";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+}
+
+function fire(){
+let f=document.createElement("div");
+f.innerHTML="✨";
+f.className="fire";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*100+"vh";
+f.style.fontSize="28px";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),2000);
+}
+</script>
+
+</body>
+</html>
